@@ -3,41 +3,25 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                script {
-                    echo '🔄 Cloning repository...'
-                    git branch: 'main', url: 'https://github.com/hnp31/Java-CI-CD-Pipeline.git'
-                }
-            }
-        }
-        stage('Verify Workspace') {
-            steps {
-                script {
-                    echo '📂 Checking workspace contents...'
-                    sh 'ls -la'
-                }
+                echo '🔄 Cloning repository...'
+                git branch: 'main', url: 'https://github.com/hnp31/Java-CI-CD-Pipeline.git'
             }
         }
         stage('Build') {
             steps {
-                script {
-                    echo '⚙️ Building project...'
-                    sh 'mvn clean package'
-                }
+                echo '⚙️ Running Maven Build...'
+                bat 'cd ABC-Technologies && mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                script {
-                    echo '🧪 Running tests...'
-                    sh 'mvn test'
-                }
+                echo '✅ Running Tests...'
+                bat 'cd ABC-Technologies && mvn test'
             }
         }
         stage('Deploy') {
             steps {
-                script {
-                    echo '🚀 Deploying application...'
-                }
+                echo '🚀 Deploying Application...'
             }
         }
     }
