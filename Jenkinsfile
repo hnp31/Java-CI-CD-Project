@@ -1,18 +1,26 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
                 script {
-                    echo 'Cloning repository...'
+                    echo '🔄 Cloning repository...'
                     git branch: 'main', url: 'https://github.com/hnp31/Java-CI-CD-Pipeline.git'
+                }
+            }
+        }
+        stage('Verify Workspace') {
+            steps {
+                script {
+                    echo '📂 Checking workspace contents...'
+                    sh 'ls -la'
                 }
             }
         }
         stage('Build') {
             steps {
                 script {
-                    echo 'Building project...'
+                    echo '⚙️ Building project...'
                     sh 'mvn clean package'
                 }
             }
@@ -20,7 +28,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    echo 'Running tests...'
+                    echo '🧪 Running tests...'
                     sh 'mvn test'
                 }
             }
@@ -28,7 +36,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    echo 'Deploying application...'
+                    echo '🚀 Deploying application...'
                 }
             }
         }
