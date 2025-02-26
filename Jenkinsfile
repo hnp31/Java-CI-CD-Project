@@ -1,14 +1,25 @@
-node {
-    stage('Checkout') {
-        git 'https://github.com/hnp31/Java-CI-CD-Pipeline.git'
-    }
-    stage('Build') {
-        sh 'mvn clean package'
-    }
-    stage('Test') {
-        sh 'mvn test'
-    }
-    stage('Deploy') {
-        echo 'Deploying application...'
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/hnp31/Java-CI-CD-Pipeline.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+            }
+        }
     }
 }
